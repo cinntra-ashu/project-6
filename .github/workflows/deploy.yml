@@ -26,7 +26,7 @@ jobs:
         run: npm test
       - name: Output information
         run: |
-          echo "MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+          echo "MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}"
   build:
     needs: test
     runs-on: ubuntu-latest
