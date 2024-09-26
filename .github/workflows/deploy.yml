@@ -7,11 +7,11 @@ on:
 env:
   MONGODB_DB_NAME: sample_mflix
 jobs:
-  test:
+  test: # change to mysql
     env:
       MONGODB_CLUSTER_ADDRESS: cluster0.hz3rz.mongodb.net
-      MONGODB_USERNAME: ashutoshsengar123 
-      MONGODB_PASSWORD: xXQxKKHQF6IrlVIO
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }} 
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
       PORT: 8080
     environment: testing
     runs-on: ubuntu-latest
@@ -26,12 +26,20 @@ jobs:
         run: npm test
       - name: Output information
         run: |
-          echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
-  deploy:
+          echo "MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+  build:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: Output information
-        run: |        
-          echo "MONGODB_DB_NAME: ${{ env.MONGODB_DB_NAME }}"
-          echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
+      - name: Get code
+        uses: actions/checkout@v4
+      - name: cache dependencies
+        run: npm ci
+      - name: Build website
+        run: npm run build
+      - name: upload artificat
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact
+          path: dist        
+  
