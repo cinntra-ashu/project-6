@@ -5,13 +5,13 @@ on:
       - main
       - dev
 env:
-  MONGODB_DB_NAME: gha-demo
+  MONGODB_DB_NAME: sample_mflix
 jobs:
   test:
     env:
-      MONGODB_CLUSTER_ADDRESS: cluster0-shard-00-01.hb2si.mongodb.net
-      MONGODB_USERNAME: cinntra11 
-      MONGODB_PASSWORD: STUnOQEp6SOBHmjn
+      MONGODB_CLUSTER_ADDRESS: cluster0.hz3rz.mongodb.net
+      MONGODB_USERNAME: ashutoshsengar123 
+      MONGODB_PASSWORD: svYlsGwFhXaOKf51
       PORT: 8080
     environment: testing
     runs-on: ubuntu-latest
